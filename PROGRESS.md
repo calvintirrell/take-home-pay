@@ -21,7 +21,7 @@ After completing each phase: (1) update this tracker with the phase just finishe
 | Phase | Description | Status | Completed |
 |---|---|---|---|
 | 0 | Scaffolding & tooling | ✅ Complete | 2026-06-30 |
-| 1 | Calculation engine + golden tests ⭐ | ⬜ Not started | — |
+| 1 | Calculation engine + golden tests ⭐ | ✅ Complete | 2026-06-30 |
 | 2 | Core UI (inputs + results table) | ⬜ Not started | — |
 | 3 | Editable rates panel | ⬜ Not started | — |
 | 4 | Enhancements (charts, paycheck view, sharing, notes) | ⬜ Not started | — |
@@ -39,4 +39,5 @@ _(Newest entries appended here as phases complete.)_
 
 - **Project kickoff** — Plan approved. Progress tracker created. Awaiting GitHub repo from user before starting Phase 0.
 - **Repo connected** — `https://github.com/calvintirrell/take-home-pay` wired to local `origin` via gh CLI (HTTPS). Kickoff commit pushed (GAME_PLAN.md, PROGRESS.md, .gitignore). Starting Phase 0 next.
-- **✅ Phase 0 — Scaffolding & tooling (2026-06-30).** Vite 6 + React 19 + TypeScript + Tailwind CSS v4 + Vitest scaffolded by hand (no interactive generator). Configured `vite.config.ts` with `base: '/take-home-pay/'` for GitHub Pages, jsdom test env, Prettier. Added README, placeholder `App.tsx`. Verified: `npm test` green (smoke test), `npm run build` succeeds, built assets correctly prefixed with `/take-home-pay/`, dev server boots → HTTP 200. **Next: Phase 1 — calculation engine (review checkpoint after).**
+- **✅ Phase 0 — Scaffolding & tooling (2026-06-30).** Vite 6 + React 19 + TypeScript + Tailwind CSS v4 + Vitest scaffolded by hand (no interactive generator). Configured `vite.config.ts` with `base: '/take-home-pay/'` for GitHub Pages, jsdom test env, Prettier. Added README, placeholder `App.tsx`. Verified: `npm test` green (smoke test), `npm run build` succeeds, built assets correctly prefixed with `/take-home-pay/`, dev server boots → HTTP 200.
+- **✅ Phase 1 — Calculation engine + golden tests (2026-06-30).** Pure TS engine in `src/engine/` (`types.ts`, `defaultRates.ts`, `calc.ts`, `calc.test.ts`). Faithful port of the Calculator sheet: three pre-tax bases (income / CA-excl-HSA / FICA-excl-401k&IRA), marginal-rate brackets (fed/NY/NYC/CA), FICA with SS cap + Additional Medicare, four location surcharges (CA SDI / WA Cares / WA PFML / NY PFL), and the $0-contribution baseline → "tax saved" memo. **Parity proven:** a Python oracle reproduced ALL authoritative Single-case Excel outputs to 1e-6, and supplied MFJ reference values. **28 tests pass** — full Single-case parity to the cent, MFJ regression, plus invariants (SS cap, HSA-not-deductible-in-CA, 401k-doesn't-cut-FICA, zero-salary). Typecheck + build clean. **← REVIEW CHECKPOINT: awaiting sign-off before Phase 2 (UI).**
