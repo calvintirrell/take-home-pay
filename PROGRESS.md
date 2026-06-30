@@ -7,7 +7,11 @@ This file records the last completed phase. Updated at every phase boundary, imm
 ---
 
 ## Workflow rule (per user, locked)
-After completing each phase: (1) update this tracker with the phase just finished, (2) `git commit`, (3) `git push` to the GitHub repo. Then continue (pausing only at the review checkpoints noted in the plan).
+After completing each phase, in order:
+1. **Test for errors** — run tests/typecheck/build; fix and **repeat the build→test cycle until the whole project works with zero errors**.
+2. Update this tracker with the phase just finished.
+3. Secret-scan, then `git commit` + `git push` to the GitHub repo.
+4. **Wait for the user's explicit approval before starting the next phase** (applies to every phase, not just the plan's named checkpoints).
 
 ## GitHub repo
 - **URL:** https://github.com/calvintirrell/take-home-pay
