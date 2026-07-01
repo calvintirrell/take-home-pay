@@ -1,5 +1,7 @@
 # Take-Home Pay Calculator (2026)
 
+**▶ Live: https://calvintirrell.github.io/take-home-pay/**
+
 An interactive web app that models 2026 take-home pay and taxes for a single W-2 earner,
 comparing three locations side by side: **New York City**, **Seattle (WA)**, and the
 **SF Bay Area (CA)**. It is a faithful recreation of an Excel tax model, rebuilt as a
