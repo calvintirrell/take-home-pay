@@ -1,15 +1,17 @@
 import { useMemo, useState } from 'react'
 import { calculate } from './engine/calc'
-import { DEFAULT_INPUTS, DEFAULT_RATES_2026 } from './engine/defaultRates'
+import { DEFAULT_INPUTS } from './engine/defaultRates'
 import type { Inputs } from './engine/types'
 import { InputsPanel } from './components/InputsPanel'
 import { ResultsTable } from './components/ResultsTable'
+import { RatesEditor } from './components/RatesEditor'
+import { useRates } from './state/useRates'
 
 export default function App() {
   const [inputs, setInputs] = useState<Inputs>(DEFAULT_INPUTS)
+  const { rates, setRates, reset, isModified } = useRates()
 
-  // Rate tables are fixed to the 2026 defaults for now; Phase 3 makes them editable.
-  const results = useMemo(() => calculate(inputs, DEFAULT_RATES_2026), [inputs])
+  const results = useMemo(() => calculate(inputs, rates), [inputs, rates])
 
   return (
     <div className="min-h-full bg-slate-50 text-slate-900">
@@ -37,6 +39,15 @@ export default function App() {
           </div>
           <ResultsTable results={results} />
         </main>
+
+        <div className="mt-6">
+          <RatesEditor
+            rates={rates}
+            onChange={setRates}
+            onReset={reset}
+            isModified={isModified}
+          />
+        </div>
 
         <footer className="mt-10 border-t border-slate-200 pt-6 text-xs text-slate-500">
           <p>

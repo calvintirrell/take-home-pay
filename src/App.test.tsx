@@ -35,17 +35,15 @@ describe('App — wiring inputs to the engine', () => {
 
   it('switches to MFJ brackets when filing status changes', () => {
     render(<App />)
-    const before = screen
-      .getByText('Federal income tax')
-      .closest('tr')!
-      .querySelectorAll('td')[1].textContent
+    const results = screen.getByRole('region', { name: 'Results by location' })
+    const fedTax = () =>
+      within(results).getByText('Federal income tax').closest('tr')!.querySelectorAll('td')[1]
+        .textContent
+    const before = fedTax()
     fireEvent.change(screen.getByLabelText('Filing status'), {
       target: { value: 'Married Filing Jointly' },
     })
-    const after = screen
-      .getByText('Federal income tax')
-      .closest('tr')!
-      .querySelectorAll('td')[1].textContent
+    const after = fedTax()
     // MFJ brackets are wider, so federal tax should drop at the same income.
     expect(after).not.toEqual(before)
   })
