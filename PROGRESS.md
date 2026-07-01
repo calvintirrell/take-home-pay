@@ -16,7 +16,7 @@ After completing each phase, in order:
 ## GitHub repo
 - **URL:** https://github.com/calvintirrell/take-home-pay
 - **Remote:** `origin` (HTTPS, gh-authenticated as calvintirrell)
-- **Pages URL:** _(pending — set after Phase 7)_
+- **Pages URL:** https://calvintirrell.github.io/take-home-pay/ (Pages enabled, source: GitHub Actions)
 
 ---
 
