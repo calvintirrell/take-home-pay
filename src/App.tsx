@@ -1,14 +1,37 @@
-import { useMemo, useState } from 'react'
+import { lazy, Suspense, useMemo, useState } from 'react'
 import { calculate } from './engine/calc'
 import { DEFAULT_INPUTS } from './engine/defaultRates'
 import type { Inputs } from './engine/types'
 import { InputsPanel } from './components/InputsPanel'
 import { ResultsTable } from './components/ResultsTable'
 import { RatesEditor } from './components/RatesEditor'
+import { PaycheckCard } from './components/PaycheckCard'
+import { ShareBar } from './components/ShareBar'
+import { NotesPanel } from './components/NotesPanel'
 import { useRates } from './state/useRates'
+import { decodeInputs } from './lib/shareUrl'
+
+// Recharts is heavy; load it on demand so the initial bundle stays small.
+const BreakdownChart = lazy(() =>
+  import('./components/BreakdownChart').then((m) => ({ default: m.BreakdownChart })),
+)
+
+function ChartFallback() {
+  return (
+    <div className="flex h-80 items-center justify-center rounded-xl border border-slate-200 bg-white text-sm text-slate-400 shadow-sm">
+      Loading chart…
+    </div>
+  )
+}
+
+/** Seed inputs from the URL (shared link) when present, else the defaults. */
+function initialInputs(): Inputs {
+  const fromUrl = decodeInputs(window.location.search)
+  return fromUrl ?? DEFAULT_INPUTS
+}
 
 export default function App() {
-  const [inputs, setInputs] = useState<Inputs>(DEFAULT_INPUTS)
+  const [inputs, setInputs] = useState<Inputs>(initialInputs)
   const { rates, setRates, reset, isModified } = useRates()
 
   const results = useMemo(() => calculate(inputs, rates), [inputs, rates])
@@ -34,26 +57,33 @@ export default function App() {
         </header>
 
         <main className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[360px_1fr]">
-          <div className="lg:sticky lg:top-6 lg:self-start">
+          <div className="space-y-6">
             <InputsPanel inputs={inputs} onChange={setInputs} />
+            <PaycheckCard results={results} />
           </div>
-          <ResultsTable results={results} />
+          <div className="space-y-6">
+            <ResultsTable results={results} />
+            <Suspense fallback={<ChartFallback />}>
+              <BreakdownChart results={results} />
+            </Suspense>
+          </div>
         </main>
 
-        <div className="mt-6">
+        <div className="mt-6 space-y-6">
+          <ShareBar inputs={inputs} />
           <RatesEditor
             rates={rates}
             onChange={setRates}
             onReset={reset}
             isModified={isModified}
           />
+          <NotesPanel />
         </div>
 
         <footer className="mt-10 border-t border-slate-200 pt-6 text-xs text-slate-500">
           <p>
             Estimates for planning only — <span className="font-medium">not tax advice</span>.
-            Confirm with a CPA before relying on these figures. Full assumptions &amp; sources
-            arrive with the Notes panel in a later phase.
+            Confirm with a CPA before relying on these figures.
           </p>
         </footer>
       </div>
