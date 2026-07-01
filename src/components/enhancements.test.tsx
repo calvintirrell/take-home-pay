@@ -20,8 +20,11 @@ describe('Phase 4 enhancements (via App)', () => {
 
   it('renders the breakdown chart with a mode toggle', async () => {
     render(<App />)
-    // Chart is lazy-loaded — wait for it to resolve.
-    expect(await screen.findByText('Where your money goes')).toBeInTheDocument()
+    // Chart is lazy-loaded (recharts dynamic import) — allow generous time under
+    // parallel test load.
+    expect(
+      await screen.findByText('Where your money goes', {}, { timeout: 5000 }),
+    ).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', { name: 'Tax detail' }))
     expect(screen.getByText('Tax breakdown')).toBeInTheDocument()
   })

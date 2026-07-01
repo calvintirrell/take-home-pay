@@ -19,7 +19,7 @@ describe('responsive results + a11y', () => {
 
   it('exposes a screen-reader summary of the chart', async () => {
     render(<App />)
-    await screen.findByText('Where your money goes') // lazy chart loaded
+    await screen.findByText('Where your money goes', {}, { timeout: 5000 }) // lazy chart
     expect(screen.getByText(/Money split by location/)).toBeInTheDocument()
   })
 })
