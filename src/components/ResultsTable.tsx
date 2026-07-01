@@ -89,14 +89,23 @@ export function ResultsTable({ results }: Props) {
   const cols: LocationResult[] = [results.nyc, results.seattle, results.sfBay]
 
   return (
-    <section aria-label="Results by location" className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-      <div className="overflow-x-auto">
+    <section
+      aria-label="Results by location"
+      className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
+    >
+      {/* Desktop / tablet: comparison table */}
+      <div className="hidden overflow-x-auto md:block">
         <table className="w-full border-collapse text-sm">
+          <caption className="sr-only">
+            Take-home pay and taxes by location: New York City, Seattle, and the SF Bay Area.
+          </caption>
           <thead>
             <tr className="border-b border-slate-200 bg-slate-50">
-              <th className="px-4 py-3 text-left font-semibold text-slate-500">Results by location</th>
+              <th scope="col" className="px-4 py-3 text-left font-semibold text-slate-600">
+                Results by location
+              </th>
               {cols.map((c) => (
-                <th key={c.key} className="px-4 py-3 text-right font-semibold text-slate-900">
+                <th key={c.key} scope="col" className="px-4 py-3 text-right font-semibold text-slate-900">
                   {c.label}
                 </th>
               ))}
@@ -108,6 +117,13 @@ export function ResultsTable({ results }: Props) {
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Mobile: one stacked card per location */}
+      <div className="divide-y divide-slate-200 md:hidden">
+        {cols.map((c) => (
+          <LocationCard key={c.key} location={c} />
+        ))}
       </div>
     </section>
   )
@@ -122,7 +138,7 @@ function SectionRows({ section, cols }: { section: SectionSpec; cols: LocationRe
             {section.heading}
           </span>
           {section.subhead && (
-            <span className="ml-2 text-xs font-normal normal-case text-slate-400">
+            <span className="ml-2 text-xs font-normal normal-case text-slate-500">
               {section.subhead}
             </span>
           )}
@@ -130,23 +146,24 @@ function SectionRows({ section, cols }: { section: SectionSpec; cols: LocationRe
       </tr>
       {section.rows.map((row) => (
         <tr key={row.label} className="border-b border-slate-100 last:border-0">
-          <td
+          <th
+            scope="row"
             className={[
-              'px-4 py-2 text-slate-700',
+              'px-4 py-2 text-left font-normal text-slate-700',
               row.indent ? 'pl-8' : '',
               row.emphasis ? 'font-semibold text-slate-900' : '',
-              row.muted ? 'text-slate-400 italic' : '',
+              row.muted ? 'italic text-slate-500' : '',
             ].join(' ')}
           >
             {row.label}
-          </td>
+          </th>
           {cols.map((c) => (
             <td
               key={c.key}
               className={[
                 'px-4 py-2 text-right font-mono tabular-nums',
                 row.emphasis ? 'font-semibold text-slate-900' : 'text-slate-700',
-                row.muted ? 'text-slate-400' : '',
+                row.muted ? 'text-slate-500' : '',
               ].join(' ')}
             >
               {fmt(row.get(c), row.variant)}
@@ -155,5 +172,51 @@ function SectionRows({ section, cols }: { section: SectionSpec; cols: LocationRe
         </tr>
       ))}
     </>
+  )
+}
+
+function LocationCard({ location }: { location: LocationResult }) {
+  return (
+    <div className="p-4">
+      <div className="flex items-baseline justify-between">
+        <h3 className="text-base font-semibold text-slate-900">{location.label}</h3>
+        <span className="font-mono text-sm font-semibold tabular-nums text-sky-700">
+          {usd(location.cashTakeHome)} <span className="text-xs font-normal text-slate-500">take-home</span>
+        </span>
+      </div>
+      <dl className="mt-3 space-y-3">
+        {SECTIONS.map((section) => (
+          <div key={section.heading}>
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+              {section.heading}
+            </p>
+            <div className="mt-1 divide-y divide-slate-50">
+              {section.rows.map((row) => (
+                <div key={row.label} className="flex items-baseline justify-between gap-4 py-1">
+                  <dt
+                    className={[
+                      'text-sm text-slate-700',
+                      row.emphasis ? 'font-semibold text-slate-900' : '',
+                      row.muted ? 'italic text-slate-500' : '',
+                    ].join(' ')}
+                  >
+                    {row.label}
+                  </dt>
+                  <dd
+                    className={[
+                      'shrink-0 font-mono text-sm tabular-nums',
+                      row.emphasis ? 'font-semibold text-slate-900' : 'text-slate-700',
+                      row.muted ? 'text-slate-500' : '',
+                    ].join(' ')}
+                  >
+                    {fmt(row.get(location), row.variant)}
+                  </dd>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </dl>
+    </div>
   )
 }

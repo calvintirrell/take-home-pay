@@ -150,7 +150,7 @@ export function RatesEditor({ rates, onChange, onReset, isModified }: Props) {
             <span className="text-xs font-semibold uppercase tracking-widest text-sky-600">
               Rate tables · 2026
             </span>
-            <span className="ml-2 text-xs text-slate-400">
+            <span className="ml-2 text-xs text-slate-500">
               edit a value only if a law/rate changes — click to expand
             </span>
           </span>

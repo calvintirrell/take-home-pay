@@ -56,8 +56,8 @@ export default function App() {
           </p>
         </header>
 
-        <main className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[360px_1fr]">
-          <div className="space-y-6">
+        <main className="mt-8 grid grid-cols-1 items-start gap-6 lg:grid-cols-[360px_1fr]">
+          <div className="space-y-6 lg:sticky lg:top-6">
             <InputsPanel inputs={inputs} onChange={setInputs} />
             <PaycheckCard results={results} />
           </div>

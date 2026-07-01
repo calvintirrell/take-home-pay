@@ -51,7 +51,7 @@ export function PaycheckCard({ results }: Props) {
           </div>
         ))}
       </dl>
-      <p className="mt-3 text-xs text-slate-400">
+      <p className="mt-3 text-xs text-slate-500">
         Cash take-home ÷ pay periods. A rough per-check estimate — real checks vary with
         withholding elections.
       </p>

@@ -8,11 +8,13 @@ describe('RatesEditor (via App)', () => {
   beforeEach(() => localStorage.clear())
 
   function federalTaxCell(): HTMLElement {
-    // Scope to the results region — "Federal income tax" also titles a bracket
-    // table in the editor.
-    const results = screen.getByRole('region', { name: 'Results by location' })
-    const row = within(results).getByText('Federal income tax').closest('tr')!
-    return within(row).getAllByRole('cell')[1] // NYC column
+    // Scope to the results *table* — "Federal income tax" also titles a bracket
+    // table in the editor and appears in the mobile cards. In the table the row
+    // label is a <th>, so the value cells index 0=NYC.
+    const region = screen.getByRole('region', { name: 'Results by location' })
+    const table = within(region).getByRole('table')
+    const row = within(table).getByText('Federal income tax').closest('tr')!
+    return within(row).getAllByRole('cell')[0] // NYC column
   }
 
   function openEditor() {

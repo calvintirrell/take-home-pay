@@ -57,7 +57,7 @@ export function NotesPanel() {
           <span className="text-xs font-semibold uppercase tracking-widest text-sky-600">
             Notes &amp; assumptions
           </span>
-          <span className="ml-2 text-xs text-slate-400">methodology, caveats, sources — click to expand</span>
+          <span className="ml-2 text-xs text-slate-500">methodology, caveats, sources — click to expand</span>
         </summary>
         <div className="space-y-6 border-t border-slate-100 px-5 py-6">
           {GROUPS.map((g) => (

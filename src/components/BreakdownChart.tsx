@@ -87,7 +87,16 @@ export function BreakdownChart({ results }: Props) {
         </div>
       </div>
 
-      <div className="mt-4 h-72 w-full">
+      {/* Screen-reader summary — the visual chart alone isn't accessible. */}
+      <p className="sr-only">
+        {mode === 'split' ? 'Money split' : 'Tax breakdown'} by location.{' '}
+        {data.map(
+          (d) =>
+            `${d.name}: ${series.map((s) => `${s.key} ${usd(Number(d[s.key]))}`).join(', ')}. `,
+        )}
+      </p>
+
+      <div className="mt-4 h-72 w-full" aria-hidden="true">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: 8 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
