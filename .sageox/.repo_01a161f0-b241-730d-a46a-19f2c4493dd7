@@ -1,0 +1,31 @@
+{
+  "repo_id": "repo_01a161f0-b241-730d-a46a-19f2c4493dd7",
+  "type": "git",
+  "init_at": "2026-10-22T04:48:47Z",
+  "init_by_email": "calvintirrell@gmail.com",
+  "init_by_name": "Calvin",
+  "repo_salt": "5c4c6cea7a6c729ee4c208d86d0f68b6b07b5d7c",
+  "endpoint": "https://sageox.ai",
+  "fingerprint": {
+    "first_commit": "5c4c6cea7a6c729ee4c208d86d0f68b6b07b5d7c",
+    "monthly_checkpoints": {
+      "2026-06": "5c4c6cea7a6c729ee4c208d86d0f68b6b07b5d7c",
+      "2026-07": "5e09fc39bfb6b2d7fb1b695deeadeac3268a4d9a"
+    },
+    "ancestry_samples": [
+      "5c4c6cea7a6c729ee4c208d86d0f68b6b07b5d7c",
+      "885469b693eed22dc730d00aa87c1360c3e036a9",
+      "67c6a2cc7442f8f3be326f8b31b3fe0f2fa51047",
+      "5e09fc39bfb6b2d7fb1b695deeadeac3268a4d9a"
+    ],
+    "remote_hashes": [
+      "sha256:61b3f5c1acf49fbe3c137b67023f2bb2f65dc24fef3722858b686c44d60326b4"
+    ]
+  },
+  "team_urls": {
+    "Calvin's Private Team": "https://git.sageox.ai/sageox-team_i4q99guzcm/team-context.git"
+  },
+  "urls_cached_at": "2026-10-22T04:49:04Z",
+  "version": "0.24.2",
+  "updated_at": "2026-10-22T04:49:04Z"
+}

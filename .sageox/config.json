@@ -1,0 +1,11 @@
+{
+  "config_version": "2",
+  "repo_id": "repo_01a161f0-b241-730d-a46a-19f2c4493dd7",
+  "repo_remote_hashes": [
+    "sha256:61b3f5c1acf49fbe3c137b67023f2bb2f65dc24fef3722858b686c44d60326b4"
+  ],
+  "team_id": "team_i4q99guzcm",
+  "team_name": "Calvin's Private Team",
+  "endpoint": "https://sageox.ai",
+  "update_frequency_hours": 24
+}
