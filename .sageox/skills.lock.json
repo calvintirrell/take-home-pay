@@ -7,11 +7,19 @@
       "onramp"
     ],
     "targets": [
+      "agents-project",
       "claude-project",
       "claude-rules"
     ]
   },
   "targets": [
+    {
+      "key": "agents-project",
+      "root": ".agents/skills",
+      "format": "agent-skills/v1",
+      "scope": "project",
+      "link_policy": "reject"
+    },
     {
       "key": "claude-project",
       "root": ".claude/skills",

@@ -1,0 +1,53 @@
+{
+  "hooks": {
+    "afterAgentResponse": [
+      {
+        "command": "'/opt/homebrew/bin/ox-adapter-cursor' hook afterAgentResponse",
+        "timeout": 10
+      }
+    ],
+    "beforeSubmitPrompt": [
+      {
+        "command": "'/opt/homebrew/bin/ox-adapter-cursor' hook beforeSubmitPrompt",
+        "timeout": 10
+      }
+    ],
+    "postToolUse": [
+      {
+        "command": "'/opt/homebrew/bin/ox-adapter-cursor' hook postToolUse",
+        "timeout": 10
+      }
+    ],
+    "postToolUseFailure": [
+      {
+        "command": "'/opt/homebrew/bin/ox-adapter-cursor' hook postToolUseFailure",
+        "timeout": 10
+      }
+    ],
+    "preCompact": [
+      {
+        "command": "'/opt/homebrew/bin/ox-adapter-cursor' hook preCompact",
+        "timeout": 10
+      }
+    ],
+    "sessionEnd": [
+      {
+        "command": "'/opt/homebrew/bin/ox-adapter-cursor' hook sessionEnd",
+        "timeout": 10
+      }
+    ],
+    "sessionStart": [
+      {
+        "command": "'/opt/homebrew/bin/ox-adapter-cursor' hook sessionStart",
+        "timeout": 10
+      }
+    ],
+    "stop": [
+      {
+        "command": "'/opt/homebrew/bin/ox-adapter-cursor' hook stop",
+        "timeout": 10
+      }
+    ]
+  },
+  "version": 1
+}
